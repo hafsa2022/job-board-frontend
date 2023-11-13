@@ -1,0 +1,172 @@
+<div class="container">
+  <div class="card card1-style" style="background-color: #c5c1c1">
+    <div class="card-body mx-auto">
+      <diV class="text-center">
+        <h1 class="page-title">Find Your Dream Job</h1>
+        <h5 class="text-light subtitle">Simple, fast and efficient</h5>
+      </diV>
+      <div
+        class="card card2-style"
+        style="background-color: rgba(12, 12, 12, 0)"
+      >
+        <div class="card-body">
+          <form class="row gy-2 gx-3 align-items-center">
+            <div class="col-md-4 col-sm-12">
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="autoSizingInput"
+                placeholder="What ?"
+              />
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="autoSizingInput"
+                placeholder="Where ?"
+              />
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="row mx-1">
+                <button type="submit" class="btn btn-warning btn-lg text-white">
+                  <strong>Search</strong>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mb-3" style="border: none">
+    <div class="card-header" style="background-color: light; border: none">
+      <h3>Recent Jobs</h3>
+    </div>
+    <div class="card-body bg-light">
+      <div
+        class="card mb-3"
+        style="max-width: 100%; border-radius: 12px"
+        *ngFor="let job of jobs"
+      >
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="..." class="img-fluid rounded-start" alt="..." />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ job.jobTitle }}</h5>
+              <p class="card-text">{{ job.jobDescription }}</p>
+              <p class="card-text">
+                <small class="text-body-secondary"
+                  >Last updated 3 mins ago</small
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-center">
+      <a href="#" style="text-decoration: none" class="view-more"
+        ><span class=""> View All Jobs</span></a
+      >
+    </div>
+  </div>
+  <div class="card mb-3" style="border: none">
+    <div class="card-header" style="background-color: light; border: none">
+      <h3>Browse By Category</h3>
+    </div>
+    <div class="card-body bg-light">
+      <div class="row g-4">
+        <div class="col-md-4 col-sm-6" *ngFor="let category of categories">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ category.categoryName }}</h5>
+              <p class="card-text">Number Of Jobs Available</p>
+              <a href="#" class="btn btn-warning">Explore Jobs</a>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-4 col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">
+                With supporting text below as a natural lead-in to additional
+                content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-md-4 col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">
+                With supporting text below as a natural lead-in to additional
+                content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">
+                With supporting text below as a natural lead-in to additional
+                content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="card text-center mt-5" style="border: none">
+    <div class="card-body bg-light" style="border: none">
+      <h5>Looking for a job ?</h5>
+      <h5>Upload your resume and easly apply to jobs !</h5>
+      <div class="">
+        <div class="mx-1">
+          <button
+            type="submit"
+            class="col-md-4 btn btn-warning btn-lg text-white"
+          >
+            <strong>Add Your Resume</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-2" style="border: none">
+    <div class="card-body bg-light">
+      <div class="row">
+        <div
+          class="col-md-6 col-sm-12 text-center"
+          style="
+            font-size: x-large;
+            font-weight: 700;
+            color: rgba(128, 128, 128, 0.589);
+          "
+        >
+          <i class="bi bi-people-fill me-2"></i>Users
+        </div>
+        <div
+          class="col-md-6 col-sm-12 text-center"
+          style="
+            font-size: x-large;
+            font-weight: 700;
+            color: rgba(128, 128, 128, 0.589);
+          "
+        >
+          <i class="bi bi-megaphone me-2"></i>Jobs
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

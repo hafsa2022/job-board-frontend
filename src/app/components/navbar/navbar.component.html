@@ -1,0 +1,113 @@
+<!-- <nav
+  class="navbar navbar-light"
+  style="background-color: rgba(0, 0, 0, 0.05); padding: 20px"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" aria-current="page" href="#">JobDream</a>
+    <div>
+      <a class="navbar-brand" routerLink="dashboard" *ngIf="loggedIn">
+        Dashboard
+      </a>
+      <a class="navbar-brand" routerLink="jobs"> Browse Jobs </a>
+      <a class="navbar-brand" routerLink="profiles">Profiles</a>
+      <a class="navbar-brand" routerLink="login" *ngIf="!loggedIn">Login</a>
+      <a class="navbar-brand" routerLink="signup" *ngIf="!loggedIn">Signup</a>
+      <a class="navbar-brand" href="#" (click)="logout($event)" *ngIf="loggedIn"
+        >Logout</a
+      >
+
+      <a class="navbar-brand"
+        ><button class="btn btn-outline-warning">
+          <strong>Post a job</strong>
+        </button></a
+      >
+    </div>
+  </div>
+</nav> -->
+<!-- <nav
+  class="navbar navbar-expand-lg navbar-light"
+  style="background-color: rgba(0, 0, 0, 0.05); padding: 20px"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" aria-current="page" href="#">JobDream</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" routerLink="dashboard" *ngIf="loggedIn"
+          >Dashboard</a
+        >
+        <a class="nav-link" routerLink="jobs">Browse Jobs</a>
+        <a class="nav-link" routerLink="profiles">Profiles</a>
+        <a class="nav-link" routerLink="login" *ngIf="!loggedIn">Login</a>
+        <a class="nav-link" routerLink="signup" *ngIf="!loggedIn">Signup</a>
+        <a class="nav-link" href="#" (click)="logout($event)" *ngIf="loggedIn"
+          >Logout</a
+        >
+
+        <a class="nav-link">
+          <button class="btn btn-outline-warning">
+            <strong>Post a job</strong>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav> -->
+<nav
+  class="navbar navbar-expand-lg navbar-light"
+  style="background-color: rgba(0, 0, 0, 0.05); padding: 20px"
+>
+  <a class="navbar-brand" aria-current="page" routerLink="/">JobDream</a>
+
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="dashboard" *ngIf="loggedIn"
+          >Dashboard</a
+        >
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="jobs">Browse Jobs</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="profiles">Profiles</a>
+      </li>
+      <li>
+        <a class="nav-link" routerLink="login" *ngIf="!loggedIn">Login</a>
+      </li>
+      <li>
+        <a class="nav-link" routerLink="signup" *ngIf="!loggedIn">Signup</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#" (click)="logout($event)" *ngIf="loggedIn"
+          >Logout</a
+        >
+      </li>
+      <li>
+        <a class="nav-link">
+          <button class="btn btn-outline-warning">
+            <strong>Post a job</strong>
+          </button>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

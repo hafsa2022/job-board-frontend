@@ -1,0 +1,149 @@
+<div class="container col-4">
+  <h3 class="text-center mb-3">Sign Up</h3>
+  <div class="card pt-5">
+    <div class="card-body">
+      <form #signupForm="ngForm" (ngSubmit)="submitSignup()">
+        <fieldset class="row mb-3">
+          <legend class="col-form-label col-form-label-lg col-sm-4 pt-0">
+            You are
+          </legend>
+          <div class="col-sm-8">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="gridRadios"
+                id="gridRadios1"
+                value="Employer"
+                [(ngModel)]="form.role"
+                checked
+              />
+              <label class="form-check-label" for="gridRadios1">
+                Employer
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="gridRadios"
+                id="gridRadios2"
+                value="Job Seeker"
+                [(ngModel)]="form.role"
+              />
+              <label class="form-check-label" for="gridRadios2">
+                Job Seeker
+              </label>
+            </div>
+          </div>
+        </fieldset>
+        <div class="row mb-3">
+          <label
+            for="inputName"
+            class="col-sm-8 col-form-label col-form-label-lg"
+            >Fullname</label
+          >
+          <div class="col-sm-12">
+            <input
+              type="email"
+              class="form-control form-control-lg"
+              id="inputName"
+              [(ngModel)]="form.fullname"
+              name="fullname"
+              required
+            />
+          </div>
+        </div>
+        <div class="alert alert-danger" [hidden]="!error.fullname">
+          {{ error.fullname }}
+        </div>
+        <div class="row mb-3">
+          <label
+            for="inputEmail"
+            class="col-sm-8 col-form-label col-form-label-lg"
+            >Email</label
+          >
+          <div class="col-sm-12">
+            <input
+              type="email"
+              class="form-control form-control-lg"
+              id="inputEmail"
+              [(ngModel)]="form.email"
+              name="email"
+              required
+            />
+          </div>
+        </div>
+        <div class="alert alert-danger" [hidden]="!error.email">
+          {{ error.email }}
+        </div>
+        <div class="row mb-3">
+          <label
+            for="inputPassword"
+            class="col-sm-8 col-form-label col-form-label-lg"
+            >Password</label
+          >
+          <div class="col-sm-12">
+            <input
+              type="password"
+              class="form-control form-control-lg"
+              id="inputPassword"
+              [(ngModel)]="form.password"
+              name="password"
+              required
+            />
+          </div>
+        </div>
+        <div class="alert alert-danger" [hidden]="!error.password">
+          {{ error.password }}
+        </div>
+        <div class="row mb-3">
+          <label
+            for="inputCpassword"
+            class="col-sm-8 col-form-label col-form-label-lg"
+            >Confirm Password</label
+          >
+          <div class="col-sm-12">
+            <input
+              type="password"
+              class="form-control form-control-lg"
+              id="inputCpassword"
+              [(ngModel)]="form.password_confirmation"
+              name="cpassword"
+              required
+            />
+          </div>
+        </div>
+        <div class="alert alert-danger" [hidden]="!error.password_confirmation">
+          {{ error.password_confirmation }}
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-12 offset-sm-12">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="gridCheck2"
+                checked
+                required
+              />
+              <label class="form-check-label" for="gridCheck2">
+                I have read and agree to the
+                <span class="text-primary">Terms & Conditions</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row mx-1 mt-5">
+          <button
+            type="submit"
+            class="btn btn-warning btn-lg mx-auto"
+            [disabled]="!signupForm.valid"
+          >
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
