@@ -1,5 +1,5 @@
+import { JobViewComponent } from './components/job-view/job-view.component';
 import { HomeComponent } from './components/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -8,6 +8,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { AfterLoginService } from './services/after-login.service';
 import { BeforeLoginService } from './services/before-login.service';
+import { ProfileViewComponent } from './components/profile-view/profile-view.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 const routes: Routes = [
   {
@@ -29,7 +32,19 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AfterLoginService],
+    // canActivate: [AfterLoginService],
+  },
+  {
+    path: 'job-view',
+    component: JobViewComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileViewComponent,
+  },
+  {
+    path: 'my-profile',
+    component: MyProfileComponent,
   },
 ];
 

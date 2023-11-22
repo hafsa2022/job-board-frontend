@@ -1,0 +1,36 @@
+.container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.card,
+.card-body {
+  border: none;
+}
+
+.card-header {
+  background-color: white;
+}
+a {
+  text-decoration: none;
+  color: #ffc107;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.close-button {
+  width: 100px;
+  background: #eec409;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+.close-button:hover,
+.close-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #eec409;
+}

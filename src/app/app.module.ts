@@ -8,12 +8,17 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { PostComponent } from './components/post/post.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
+import { JobViewComponent } from './components/job-view/job-view.component';
+import { ProfileViewComponent } from './components/profile-view/profile-view.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -23,12 +28,23 @@ import { HomeComponent } from './components/home/home.component';
     ProfilesComponent,
     JobsComponent,
     NavbarComponent,
-    PostComponent,
     FooterComponent,
-    DashboardComponent,
     HomeComponent,
+    JobViewComponent,
+    ProfileViewComponent,
+    DashboardComponent,
+    MyProfileComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,233 @@
+<div class="container">
+  <div class="card" style="border: none">
+    <div class="card-header" style="border: none; background-color: light">
+      <h2 class="fs-title">Complete Your Profile Information</h2>
+    </div>
+    <div class="card-body ps-5 pe-5">
+      <form #profileForm="ngForm" (ngSubmit)="submit()">
+        <div class="row mb-3">
+          <label
+            for="inputName"
+            class="col-md-2 col-sm-8 col-form-label col-form-label-lg"
+            >Full Name</label
+          >
+          <div class="col-sm-12 col-md-4">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="inputName"
+              [(ngModel)]="profileDetails.fullName"
+              name="fullname"
+              required
+            />
+          </div>
+          <!-- </div> -->
+          <!-- <div class="alert alert-danger" [hidden]="!error.fullname">
+          {{ error.fullname }}
+        </div> -->
+          <!-- <div class="row mb-3"> -->
+          <label
+            for="inputEmail"
+            class="col-sm-8 col-md-2 col-form-label col-form-label-lg"
+            >Email</label
+          >
+          <div class="col-sm-12 col-md-4">
+            <input
+              type="email"
+              class="form-control form-control-lg"
+              id="inputEmail"
+              [(ngModel)]="profileDetails.email"
+              name="email"
+              disabled
+            />
+          </div>
+        </div>
+        <!-- <div class="alert alert-danger" [hidden]="!error.email">
+          {{ error.email }}
+        </div> -->
+        <div class="row mb-3">
+          <label
+            for="inputPhoneNumber"
+            class="col-sm-8 col-md-2 col-form-label col-form-label-lg"
+            >Phone Number</label
+          >
+          <div class="col-sm-12 col-md-4">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="inputPhoneNumber"
+              [(ngModel)]="profileDetails.phoneNumber"
+              name="phonenumber"
+            />
+          </div>
+          <!-- </div> -->
+          <!-- <div class="alert alert-danger" [hidden]="!error.fullname">
+          {{ error.fullname }}
+        </div> -->
+          <!-- <div class="row mb-3"> -->
+          <label
+            for="inputPosition"
+            class="col-sm-8 col-md-2 col-form-label col-form-label-lg"
+            >Position</label
+          >
+          <div class="col-sm-12 col-md-4">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="inputPosition"
+              [(ngModel)]="profileDetails.position"
+              name="position"
+              required
+            />
+          </div>
+        </div>
+        <!-- <div class="alert alert-danger" [hidden]="!error.fullname">
+          {{ error.fullname }}
+        </div> -->
+        <div class="row mb-3" *ngIf="userData.role === 'Job Seeker'">
+          <label
+            for="inputSkills"
+            class="col-sm-8 col-md-2 col-form-label col-form-label-lg"
+            >Skills</label
+          >
+          <div class="col-sm-12 col-md-4">
+            <textarea
+              rows="5"
+              cols="5"
+              name="skills"
+              id="inputSkills"
+              [(ngModel)]="profileDetails.skills"
+              placeholder="Describe your skills with sentances"
+              class="form-control form-control-lg"
+              required
+            ></textarea>
+          </div>
+          <!-- </div> -->
+          <!-- <div class="alert alert-danger" [hidden]="!error.fullname">
+          {{ error.fullname }}
+        </div> -->
+          <!-- <div class="row mb-3"> -->
+          <label
+            for="inputAboutYou"
+            class="col-sm-8 col-md-2 col-form-label col-form-label-lg"
+            >About You</label
+          >
+          <div class="col-sm-12 col-md-4">
+            <textarea
+              rows="5"
+              cols="5"
+              name="aboutyou"
+              id="inputAboutYou"
+              [(ngModel)]="profileDetails.aboutYou"
+              placeholder="Talk about your experiences"
+              class="form-control form-control-lg"
+              required
+            ></textarea>
+          </div>
+        </div>
+        <div class="row mb-3" *ngIf="userData.role === 'Job Seeker'">
+          <label
+            for="inputResume"
+            class="col-sm-8 col-md-2 col-form-label col-form-label-lg"
+            >Resume</label
+          >
+          <div class="col-sm-12 col-md-4">
+            <input
+              type="file"
+              class="form-control form-control-lg"
+              id="inputResume"
+              [(ngModel)]="profileDetails.resume"
+              name="resume"
+              (change)="uploadFile($event)"
+              accept=".pdf"
+              required
+            />
+          </div>
+          <label
+            for="inputImage"
+            class="col-sm-8 col-md-2 col-form-label col-form-label-lg"
+            >Image</label
+          >
+          <div class="col-sm-12 col-md-4">
+            <input
+              type="file"
+              class="form-control form-control-lg"
+              id="inputImage"
+              [(ngModel)]="profileDetails.image"
+              name="image"
+              (change)="uploadFile($event)"
+              accept="image/*"
+              required
+            />
+          </div>
+        </div>
+        <div class="row mb-3" *ngIf="userData.role === 'Employer'">
+          <label
+            for="inputImage"
+            class="col-sm-8 col-form-label col-form-label-lg"
+            >Image</label
+          >
+          <div class="col-sm-12">
+            <input
+              type="file"
+              class="form-control form-control-lg"
+              id="inputImage"
+              [(ngModel)]="profileDetails.image"
+              (change)="uploadFile($event)"
+              name="image"
+              accept="image/*"
+              required
+            />
+          </div>
+        </div>
+        <!-- <div class="alert alert-danger" [hidden]="!error.fullname">
+          {{ error.fullname }}
+        </div> -->
+        <div class="row mb-3">
+          <label
+            for="inputCity"
+            class="col-sm-8 col-md-2 col-form-label col-form-label-lg"
+            >City</label
+          >
+          <div class="col-sm-12 col-md-4">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="inputCity"
+              [(ngModel)]="profileDetails.city"
+              name="city"
+              required
+            />
+          </div>
+          <label
+            for="inputCountry"
+            class="col-sm-8 col-md-2 col-form-label col-form-label-lg"
+            >Country</label
+          >
+          <div class="col-sm-12 col-md-4">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="inputCountry"
+              [(ngModel)]="profileDetails.country"
+              name="country"
+              required
+            />
+          </div>
+        </div>
+        <!-- <div class="alert alert-danger" [hidden]="!error.fullname">
+          {{ error.fullname }}
+        </div> -->
+        <div class="row mx-1 mt-5">
+          <button
+            type="submit"
+            class="btn btn-warning btn-lg mx-auto"
+            [disabled]="!profileForm.valid"
+          >
+            Update Profile
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

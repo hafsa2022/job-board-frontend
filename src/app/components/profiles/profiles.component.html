@@ -1,1 +1,146 @@
-<p>profiles works!</p>
+<div class="container">
+  <div class="row">
+    <!-- <div
+      class="card card mb-3 col-md-3 col-sm-12 bg-light"
+      style="border: none"
+    >
+      <div class="card-body m-4">
+        <div class="card">
+          <div class="card-body">
+            <form #searchForm="ngForm">
+              <div class="row mb-3">
+                <label
+                  for="inputFilter"
+                  class="col-md-8 col-sm-3 col-form-label"
+                  >Filtre</label
+                >
+                <div class="col-md-12 col-sm-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputFilter"
+                    name="filter"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label
+                  for="inputCategory"
+                  class="col-md-8 col-sm-3 col-form-label"
+                  >Category</label
+                >
+                <div class="col-md-12 col-sm-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputCategory"
+                    name="category"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label
+                  for="inputJobType"
+                  class="col-md-8 col-sm-3 col-form-label"
+                  >Job Type</label
+                >
+                <div class="col-md-12 col-sm-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputJobType"
+                    name="jobType"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label
+                  for="inputLocation"
+                  class="col-md-8 col-sm-3 col-form-label"
+                  >Location</label
+                >
+                <div class="col-md-12 col-sm-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputLocation"
+                    name="location"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-sm-12 offset-sm-12">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="gridCheck1"
+                      checked
+                    />
+                    <label class="form-check-label" for="gridCheck1">
+                      Only remote Jobs
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mx-1 mt-5">
+                <button
+                  type="submit"
+                  class="btn btn-warning mx-auto"
+                  [disabled]="!searchForm.valid"
+                >
+                  <strong>Search</strong>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="card col-md-11 col-sm-12 bg-light pt-4 mx-auto" style="border: none">
+      <div class="card-header bg-light" style="border: none">
+        <h3 class="fs-title">All Profiles</h3>
+      </div>
+      <div class="card-body bg-light">
+        <div
+          class="card mb-3"
+          style="max-width: 100%; border-radius: 12px"
+          *ngFor="let job of jobs"
+        >
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="..." class="img-fluid rounded-start" alt="..." />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ job.jobTitle }}</h5>
+                <p class="card-text">{{ job.jobDescription }}</p>
+                <button
+                  class="btn btn-outline-warning btn-sm mb-3"
+                  (click)="profileView()"
+                >
+                  <strong>Profile View</strong>
+                </button>
+                <p class="card-text">
+                  <small class="text-body-secondary">Created : </small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center bg-light" style="border: none">
+        <nav aria-label="...">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

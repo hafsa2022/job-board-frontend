@@ -6,7 +6,7 @@
 }
 
 .container {
-  padding-top: 150px;
+  padding-top: 50px;
   padding-bottom: 150px;
 }
 
@@ -26,4 +26,20 @@
 .form-check-input:not(checked) {
   background-color: white;
   border: 1px solid rgba(139, 139, 139, 0.918);
+}
+
+input:focus {
+  box-shadow: none !important;
+  border: 1px solid #eec409;
+  outline-width: 0;
+  transition: All 0.5s ease-in;
+}
+
+.fs-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: black;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
 }

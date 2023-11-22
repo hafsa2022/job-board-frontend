@@ -1,0 +1,30 @@
+.view-more {
+  font-size: larger;
+  font-weight: 500;
+  color: rgba(128, 128, 128, 0.712);
+}
+
+.view-more:hover {
+  color: rgb(180, 82, 82);
+}
+
+input:focus {
+  box-shadow: none !important;
+  border: 1px solid #eec409;
+  outline-width: 0;
+  transition: All 0.5s ease-in;
+}
+
+.form-check-input:checked {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.fs-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: black;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}

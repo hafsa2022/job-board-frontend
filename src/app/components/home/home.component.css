@@ -41,3 +41,12 @@
 .view-more:hover {
   color: rgb(180, 82, 82);
 }
+
+.fs-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: black;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}

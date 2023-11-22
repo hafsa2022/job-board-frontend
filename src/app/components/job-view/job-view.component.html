@@ -1,0 +1,196 @@
+<div class="container">
+  <div class="ms-5">
+    <i class="bi bi-arrow-left me-2"></i
+    ><a (click)="toJobsList()" class="job-search">Jobs Search</a>
+  </div>
+  <div class="card p-5 m-5" style="border: none">
+    <div class="card-header" style="background-color: white">
+      <h4 class="fs-title" style="color: black">Title Of Job</h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-7 mx-md-5">
+          <div class="card" style="border: none">
+            <div class="card-body">
+              <div class="row">
+                <span class="col-md-4 col-sm-12" style="color: gray"
+                  ><strong><i class="bi bi-clock me-1"></i>date</strong></span
+                >
+                <span class="col-md-4 col-sm-12" style="color: gray">
+                  <strong>
+                    <i class="bi bi-folder me-1"></i>categoryType</strong
+                  ></span
+                >
+                <span class="col-md-4 col-sm-12" style="color: gray">
+                  <strong
+                    ><i class="bi bi-geo-alt me-1"></i>categoryType</strong
+                  ></span
+                >
+                <!-- <span class="col-3"> categoryType</span> -->
+              </div>
+              <h3 class="pt-5 mt-3">Job Details</h3>
+              <div class="pt-2">
+                Blanditiis amet sint earum et eaque. Expedita aliquam dolorem ut
+                voluptatem commodi error quos rem. Explicabo consequatur omnis
+                accusantium optio. Omnis eum culpa quam facere eius sint aut.
+                Dolores repellendus qui et. Eaque et atque sed non expedita
+                quia. Similique qui libero illum voluptates nostrum ipsum
+                exercitationem et. Velit voluptate molestiae maxime.
+              </div>
+
+              <h3 class="pt-5 mt-3">Company Description</h3>
+              <div class="pt-2">
+                Et nam nihil ut modi vel est pariatur. Et harum nihil occaecati
+                sunt est sit numquam. Nulla non odio debitis et enim. Aut
+                consequatur provident temporibus id inventore adipisci et.
+              </div>
+              <h3 class="pt-5 mt-3">Skills</h3>
+              <div class="pt-2">
+                <button class="btn btn-success me-2" *ngFor="let i of skills">
+                  {{ i.skillName }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mt-md-5 pt-md-2">
+          <div class="card mt-5 mx-sm-3">
+            <div
+              class="card-body"
+              style="background-color: rgba(119, 118, 118, 0.171)"
+            >
+              <div><strong>START DATE:</strong> 2023-12-05</div>
+              <div><strong>COMPANY:</strong> Volkman LLC</div>
+              <div><strong>SALARY:</strong> $8 - $635</div>
+              <div><strong>JOB TYPE:</strong> Temporary</div>
+              <div><strong>LOCATION:</strong> Saks</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="card-footer ps-4 mt-3"
+      style="background-color: white; border: none"
+    >
+      <button
+        class="btn btn-warning btn-style"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal2"
+      >
+        <strong>Apply Now</strong>
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel2"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 col-md-offset-3">
+            <form [formGroup]="applyDetails" id="msform">
+              <fieldset>
+                <h2 class="fs-title">Apply To This Job</h2>
+                <input
+                  type="text"
+                  formControlName="fullName"
+                  [ngClass]="{
+                    'is-invalid': candidate['fullName'].errors
+                  }"
+                  placeholder="FullName"
+                />
+                <div *ngIf="applyDetails.controls['fullName'].errors">
+                  <div
+                    *ngIf="candidate['fullName'].errors?.['required']"
+                    class="alert alert-danger"
+                  >
+                    This field is required
+                  </div>
+                </div>
+                <input
+                  type="email"
+                  formControlName="email"
+                  name="email"
+                  placeholder="Email"
+                />
+                <div *ngIf="applyDetails.controls['email'].errors">
+                  <div
+                    *ngIf="candidate['email'].errors?.['required']"
+                    class="alert alert-danger"
+                  >
+                    This field is required
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  formControlName="phoneNumber"
+                  name="phonenumber"
+                  placeholder="Phone Number"
+                  class="form-control form-control-lg"
+                />
+                <input
+                  type="file"
+                  formControlName="resume"
+                  name="resume"
+                  placeholder="Add Your Resume"
+                  class="form-control"
+                />
+                <div *ngIf="applyDetails.controls['resume'].errors">
+                  <div
+                    *ngIf="candidate['resume'].errors?.['required']"
+                    class="alert alert-danger"
+                  >
+                    This field is required
+                  </div>
+                </div>
+                <textarea
+                  rows="5"
+                  cols="5"
+                  formControlName="coverLetter"
+                  placeholder="Cover Letter"
+                  [ngClass]="{
+                    'is-invalid': candidate['coverLetter'].errors
+                  }"
+                ></textarea>
+                <!-- <div
+                  *ngIf="
+                    company_step &&
+                    companyInformation.controls['companyDescription'].errors
+                  "
+                >
+                  <div
+                    *ngIf="company['companyDescription'].errors?.['required']"
+                    class="alert alert-danger"
+                  >
+                    This field is required
+                  </div>
+                </div> -->
+                <input
+                  (click)="submit()"
+                  type="submit"
+                  name="submit"
+                  class="submit action-button"
+                  value="Apply"
+                  data-bs-dismiss="modal"
+                />
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Save changes
+        </button>
+      </div> -->
+    </div>
+  </div>
+</div>

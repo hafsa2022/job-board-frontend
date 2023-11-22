@@ -1,0 +1,7 @@
+.social-icon {
+  transition: transform 1s ease-in-out;
+}
+.social-icon:hover {
+  transform: rotate(360deg);
+  background-color: #ffde59;
+}

@@ -1,13 +1,15 @@
-.card {
-  border-radius: 8px;
-  border: 0;
-  padding: 10px;
-  box-shadow: 5px 10px 18px #888888;
-}
-
 .container {
   padding-top: 50px;
-  padding-bottom: 200px;
+  padding-bottom: 50px;
+}
+/*headings*/
+.fs-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: black;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 .ng-valid:not(form) {
@@ -23,18 +25,14 @@
   border-color: #ffc107;
 }
 
+.form-check-input:not(checked) {
+  background-color: white;
+  border: 1px solid rgba(139, 139, 139, 0.918);
+}
+
 input:focus {
   box-shadow: none !important;
   border: 1px solid #eec409;
   outline-width: 0;
   transition: All 0.5s ease-in;
-}
-
-.fs-title {
-  font-size: 18px;
-  text-transform: uppercase;
-  color: black;
-  margin-bottom: 10px;
-  letter-spacing: 2px;
-  font-weight: bold;
 }

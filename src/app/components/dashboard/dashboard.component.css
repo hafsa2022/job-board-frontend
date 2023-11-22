@@ -1,0 +1,13 @@
+.container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.fs-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: black;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
