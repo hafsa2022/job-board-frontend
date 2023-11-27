@@ -98,7 +98,7 @@ export class NavbarComponent implements OnInit {
     this.tokenService.remove();
     this.userDataService.remove();
     this.router.navigateByUrl('login');
-    window.location.reload();
+    // window.location.reload();
   }
 
   toggleNavbar() {

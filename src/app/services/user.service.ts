@@ -11,4 +11,8 @@ export class UserService {
   getAllusers() {
     return this.http.get(this.baseUrl + 'getallusers');
   }
+
+  updateUserName(data: any) {
+    return this.http.post(this.baseUrl + 'updateusername', data);
+  }
 }

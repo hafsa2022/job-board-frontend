@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserDataService } from 'src/app/services/user-data.service';
@@ -30,7 +31,8 @@ export class MyProfileComponent implements OnInit {
     private router: Router,
     private userDataService: UserDataService,
     private profileService: ProfileService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -98,6 +100,14 @@ export class MyProfileComponent implements OnInit {
         this.toastr.success('Your profile was updated successfully', '', {
           timeOut: 3000,
           progressBar: true,
+        });
+        const formDataUser = new FormData();
+        formDataUser.append('fullName', this.profileDetails.fullName);
+        formDataUser.append('email', this.profileDetails.email);
+        this.userService.updateUserName(formDataUser).subscribe((data) => {
+          const userData: any = data;
+          console.log(this.userData);
+          this.userDataService.set(userData.user);
         });
         this.profileData = data;
         this.profileDetails = {

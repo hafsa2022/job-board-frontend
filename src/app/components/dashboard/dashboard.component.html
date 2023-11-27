@@ -98,8 +98,10 @@
         <div class="col-md-12">
           <div
             class="card-text text-gray m-5 text-center"
-            style="max-width: 100%; border-radius: 12px;padding-bottom: 170px;"
-            *ngIf="userApplications.length === 0"
+            style="max-width: 100%; border-radius: 12px; padding-bottom: 170px"
+            *ngIf="
+              userApplications.length === 0 && userData.role === 'Job Seeker'
+            "
           >
             Nothing Applied Yet
           </div>
