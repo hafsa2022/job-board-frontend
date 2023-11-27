@@ -17,4 +17,7 @@ export class UserDataService {
     this.userData = localStorage.getItem('user');
     return JSON.parse(this.userData);
   }
+  remove() {
+    return localStorage.removeItem('user');
+  }
 }

@@ -20,40 +20,66 @@ export class MyProfileComponent implements OnInit {
     aboutYou: '',
     city: '',
     country: '',
+    numberOfExper: '',
   };
   userData: any;
+  series = ['1', '2', '3', '4', '5+'];
+  profileData: any;
+
   constructor(
     private router: Router,
     private userDataService: UserDataService,
     private profileService: ProfileService,
     private toastr: ToastrService
   ) {}
+
   ngOnInit(): void {
     this.userData = this.userDataService.get();
-    this.profileDetails = {
-      fullName: this.userData.username,
-      email: this.userData.email,
-      phoneNumber: '',
-      position: '',
-      resume: '',
-      image: '',
-      skills: '',
-      aboutYou: '',
-      city: '',
-      country: '',
-    };
+    console.log(this.userData.id);
+    const formData = new FormData();
+    formData.append('userId', this.userData.id);
+    this.profileService.getProfile(formData).subscribe((data) => {
+      this.profileData = data;
+      this.profileDetails = {
+        fullName: this.profileData.profile.username,
+        email: this.profileData.profile.email,
+        phoneNumber: this.profileData.profile.phone_number
+          ? this.profileData.profile.phone_number
+          : '',
+        position: this.profileData.profile.position
+          ? this.profileData.profile.position
+          : '',
+        resume: '',
+        image: '',
+        skills: this.profileData.profile.skills
+          ? this.profileData.profile.skills
+          : '',
+        aboutYou: this.profileData.profile.about
+          ? this.profileData.profile.about
+          : '',
+        city: this.profileData.profile.city
+          ? this.profileData.profile.city
+          : '',
+        country: this.profileData.profile.country
+          ? this.profileData.profile.country
+          : '',
+        numberOfExper: this.profileData.profile.number_of_exper
+          ? this.profileData.profile.number_of_exper
+          : '',
+      };
+    });
   }
+
   uploadFile(event: any) {
     if (event.target.files[0].type === 'application/pdf') {
       this.profileDetails.resume = event.target.files[0];
-      console.log(this.profileDetails.resume);
     } else if (event.target.files[0].type.startsWith('image/')) {
       this.profileDetails.image = event.target.files[0];
-      console.log(this.profileDetails.image);
     } else {
       return;
     }
   }
+
   submit() {
     const formData = new FormData();
     formData.append('fullName', this.profileDetails.fullName);
@@ -64,12 +90,47 @@ export class MyProfileComponent implements OnInit {
     formData.append('image', this.profileDetails.image);
     formData.append('city', this.profileDetails.city);
     formData.append('country', this.profileDetails.country);
+    formData.append('skills', this.profileDetails.skills);
+    formData.append('about', this.profileDetails.aboutYou);
+    formData.append('number_of_exper', this.profileDetails.numberOfExper);
     this.profileService.updateProfile(formData).subscribe(
       (data) => {
         this.toastr.success('Your profile was updated successfully', '', {
-          timeOut: 2000,
+          timeOut: 3000,
           progressBar: true,
         });
+        this.profileData = data;
+        this.profileDetails = {
+          fullName: this.profileData.profile.username,
+          email: this.profileData.profile.email,
+          phoneNumber: this.profileData.profile.phone_number
+            ? this.profileData.profile.phone_number
+            : '',
+          position: this.profileData.profile.position
+            ? this.profileData.profile.position
+            : '',
+          resume: this.profileData.profile.resume
+            ? this.profileData.profile.resume
+            : '',
+          image: this.profileData.profile.image
+            ? this.profileData.profile.image
+            : '',
+          skills: this.profileData.profile.skills
+            ? this.profileData.profile.skills
+            : '',
+          aboutYou: this.profileData.profile.about
+            ? this.profileData.profile.about
+            : '',
+          city: this.profileData.profile.city
+            ? this.profileData.profile.city
+            : '',
+          country: this.profileData.profile.country
+            ? this.profileData.profile.country
+            : '',
+          numberOfExper: this.profileData.profile.number_of_exper
+            ? this.profileData.profile.number_of_exper
+            : '',
+        };
       },
       (error) => console.log(error)
     );

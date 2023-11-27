@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="card" style="border: none">
+  <div class="card mb-1" style="border: none">
     <div class="card-header" style="border: none">
       <h4 class="fs-title">Dashboard</h4>
     </div>
@@ -9,36 +9,50 @@
     >
       <div class="row" style="justify-content: center">
         <div
-          class="col-md-2 p-4 mx-4 mt-2 bg-white col-sm-6 text-center"
+          class="col-md-3 p-4 mx-4 mt-2 bg-white col-sm-11 text-center"
           style="border-radius: 6px"
+          *ngIf="userData.role === 'Employer'"
         >
           <i
             class="bi bi-briefcase-fill me-2"
             style="font-size: 30px; color: violet"
           ></i
-          ><span style="color: gray; font-size: large">12 Posts</span>
+          ><span style="color: gray; font-size: large">{{ j }} Posts</span>
         </div>
         <div
-          class="col-md-2 p-4 col-sm-6 text-center bg-white mt-2"
+          class="col-md-3 p-4 col-sm-11 text-center bg-white mt-2"
           style="border-radius: 6px"
+          *ngIf="userData.role === 'Job Seeker'"
         >
           <i
             class="bi bi-clipboard2-check me-2"
             style="font-size: 30px; color: rgba(194, 100, 105, 0.931)"
           ></i
-          ><span style="color: gray; font-size: large"> 12 Applications</span>
+          ><span style="color: gray; font-size: large">
+            {{ userApplications.length }} Applications</span
+          >
         </div>
       </div>
-      <div class="row mt-5">
-        <!-- <div class="card"> -->
-        <!-- <div class="card-body"> -->
-        <div class="row">
-          <div class="col-md-8">
-            <div class="card-body bg-white" style="border-radius: 6px">
-              <h5>Your Profile Views</h5>
+    </div>
+  </div>
+  <!-- <div class="card mb-1" style="border: none">
+    <div
+      class="card-body"
+      style="border: none; background-color: rgba(128, 128, 128, 0.05)"
+    >
+       <div class="row mt-5">
+      <div class="card">
+      <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-body bg-white" style="border-radius: 6px">
+            <h5>Your Profile Views</h5>
+            <div>
+              <canvas id="lineChart"></canvas>
             </div>
           </div>
-          <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
             <div class="card-body bg-white" style="border-radius: 6px">
               <h5>Notifications</h5>
               <div class="m-2">
@@ -68,27 +82,176 @@
             </div>
           </div>
         </div>
-        <!-- </div> -->
-        <!-- </div> -->
+        </div>
+        </div>
       </div>
-      <div class="row mt-5">
+    </div>
+  </div> -->
+
+  <div class="card" style="border: none">
+    <div
+      class="card-body"
+      class="card-body"
+      style="border: none; background-color: rgba(128, 128, 128, 0.05)"
+    >
+      <div class="row">
         <div class="col-md-12">
-          <div class="card-body bg-white" style="border-radius: 6px">
-            <h5>Recent Applicants</h5>
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="..." />
+          <div
+            class="card-text text-gray m-5 text-center"
+            style="max-width: 100%; border-radius: 12px;padding-bottom: 170px;"
+            *ngIf="userApplications.length === 0"
+          >
+            Nothing Applied Yet
+          </div>
+          <div
+            class="card-body bg-white"
+            style="border-radius: 6px"
+            *ngIf="
+              userData.role === 'Job Seeker' && userApplications.length != 0
+            "
+          >
+            <h5>Recent Applications</h5>
+            <div
+              class="card mb-3"
+              style="max-width: 100%; border-radius: 12px"
+              *ngFor="let app of userApplications"
+            >
+              <div class="row g-0 mb-3">
+                <div class="col-md-3 ps-4 mt-2" style="align-self: center">
+                  <img
+                    [src]="getImageUrl(app.job.company.image)"
+                    class="rounded-circle"
+                    alt="..."
+                    width="150"
+                    height="150"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ app.job.title }}</h5>
+                    <p class="card-text">{{ app.job.description }}</p>
+                    <!-- <button class="btn btn-outline-warning btn-sm mb-3">
+                      <strong>Profile View</strong>
+                    </button> -->
+                    <p class="card-text">
+                      <small class="text-body-secondary"
+                        >{{ app.job.city }}, {{ app.job.country }}</small
+                      >
+                    </p>
+                    <p class="card-text">
+                      <small class="text-body-secondary">{{
+                        (app.created_at | dayDifference) === 0
+                          ? "Updated few minutes"
+                          : "Updated " +
+                            (app.created_at | dayDifference) +
+                            " days"
+                      }}</small>
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">FullName</h5>
-                  <p class="card-text">Position</p>
-                  <button class="btn btn-outline-warning btn-sm mb-3">
-                    <strong>Profile View</strong>
+            </div>
+          </div>
+          <div
+            class="card-body bg-white"
+            style="border-radius: 6px"
+            *ngIf="userData.role === 'Employer' && userJobs.length != 0"
+          >
+            <h5>Recent Posts</h5>
+            <div
+              class="card mb-3"
+              style="max-width: 100%; border-radius: 12px"
+              *ngFor="let job of userJobs"
+            >
+              <div class="row g-0">
+                <div
+                  class="ps-4 mt-2 col-md-3 col-sm-12"
+                  style="align-self: center"
+                >
+                  <img
+                    [src]="getImageUrl(job.company.image)"
+                    class="rounded-circle"
+                    alt="..."
+                    width="150"
+                    height="150"
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ job.title }}</h5>
+                    <p class="card-text">{{ job.description }}</p>
+                    <!-- <button class="btn btn-outline-warning btn-sm mb-3">
+                      <strong>Profile View</strong>
+                    </button> -->
+                    <p class="card-text">
+                      <small class="text-body-secondary"
+                        >{{ job.city }}, {{ job.country }}</small
+                      >
+                    </p>
+                    <p class="card-text">
+                      <small class="text-body-secondary">
+                        {{
+                          (job.created_at | dayDifference) === 0
+                            ? "Updated few minutes"
+                            : "Updated " +
+                              (job.created_at | dayDifference) +
+                              " days"
+                        }}
+                      </small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="card-body bg-white"
+            style="border-radius: 6px"
+            *ngIf="userData.role === 'Employer' && applicants.length != 0"
+          >
+            <h5>Recent Applicants</h5>
+            <div
+              class="card mb-3"
+              style="max-width: 100%; border-radius: 12px"
+              *ngFor="let applicant of applicants"
+            >
+              <div class="row g-0">
+                <div class="ps-4 mt-2 col-md-3" style="align-items: center">
+                  <img
+                    [src]="getImageUrl(applicant.job.company.image)"
+                    class="rounded-circle"
+                    alt="..."
+                    width="150"
+                    height="150"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ applicant.job.title }}</h5>
+                    <p class="card-text">{{ applicant.username }}</p>
+                    <p class="card-text">
+                      Number Of Exper: {{ applicant.number_of_exper }}
+                    </p>
+                    <p class="card-text">
+                      <small class="text-body-secondary">
+                        {{
+                          (applicant.created_at | dayDifference) === 0
+                            ? "Updated few minutes"
+                            : "Updated " +
+                              (applicant.created_at | dayDifference) +
+                              " days"
+                        }}
+                      </small>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-2" style="align-self: center">
+                  <button
+                    class="btn btn-outline-warning btn-sm mb-3"
+                    (click)="viewApplicant(applicant)"
+                  >
+                    <strong>View</strong>
                   </button>
-                  <p class="card-text">
-                    <small class="text-body-secondary">location</small>
-                  </p>
                 </div>
               </div>
             </div>

@@ -15,8 +15,9 @@
               <input
                 type="text"
                 class="form-control form-control-lg"
-                id="autoSizingInput"
-                placeholder="What ?"
+                name="searchtitle"
+                placeholder="What ? (Title)"
+                [(ngModel)]="searchTitle"
               />
             </div>
             <div class="col-md-4 col-sm-12">
@@ -24,12 +25,18 @@
                 type="text"
                 class="form-control form-control-lg"
                 id="autoSizingInput"
-                placeholder="Where ?"
+                placeholder="Where ? (City)"
+                [(ngModel)]="searchCity"
+                name="searchcity"
               />
             </div>
             <div class="col-md-4 col-sm-12">
               <div class="row mx-1">
-                <button type="submit" class="btn btn-warning btn-lg text-white">
+                <button
+                  type="submit"
+                  class="btn btn-warning btn-lg text-white"
+                  (click)="search()"
+                >
                   <strong>Search</strong>
                 </button>
               </div>
@@ -39,7 +46,11 @@
       </div>
     </div>
   </div>
-  <div class="card mb-3" style="border: none">
+  <div
+    class="card mb-3"
+    style="border: none; background-color: light"
+    *ngIf="jobsResu.length != 0"
+  >
     <div class="card-header" style="background-color: light; border: none">
       <h3 class="fs-title">Recent Jobs</h3>
     </div>
@@ -47,19 +58,28 @@
       <div
         class="card mb-3"
         style="max-width: 100%; border-radius: 12px"
-        *ngFor="let job of jobs"
+        *ngFor="let job of jobsResu"
       >
         <div class="row g-0">
-          <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="..." />
+          <div class="ps-4 mt-2 col-md-2 col-sm-12" style="align-self: center">
+            <img
+              [src]="getImageUrl(job.company.image)"
+              class="rounded-circle"
+              alt="..."
+              width="150"
+              height="150"
+            />
           </div>
-          <div class="col-md-8">
+          <div class="col-md-10">
             <div class="card-body">
-              <h5 class="card-title">{{ job.jobTitle }}</h5>
-              <p class="card-text">{{ job.jobDescription }}</p>
+              <h5 class="card-title">{{ job.title }}</h5>
+              <span class="text-body-secondary"
+                >{{ job.city }}, {{ job.country }}</span
+              >
+              <p class="text-body-secondary">{{ job.description }}</p>
               <p class="card-text">
                 <small class="text-body-secondary"
-                  >Last updated 3 mins ago</small
+                  >Published: {{ job.created_at }}</small
                 >
               </p>
             </div>
@@ -68,23 +88,33 @@
       </div>
     </div>
     <div class="card-footer text-center">
-      <a href="#" style="text-decoration: none" class="view-more"
+      <a routerLink="jobs" style="text-decoration: none" class="view-more"
         ><span class=""> View All Jobs</span></a
       >
     </div>
   </div>
   <div class="card mb-3" style="border: none">
     <div class="card-header" style="background-color: light; border: none">
-      <h3 class="fs-title">Browse By Category</h3>
+      <h3 class="fs-title">Categories</h3>
     </div>
     <div class="card-body bg-light">
       <div class="row g-4">
         <div class="col-md-4 col-sm-6" *ngFor="let category of categories">
-          <div class="card">
-            <div class="card-body">
+          <div class="card" style="border: none">
+            <div
+              class="card-body"
+              style="background-color: #f6e9ac; border-radius: 10px"
+            >
               <h5 class="card-title">{{ category.categoryName }}</h5>
-              <p class="card-text">Number Of Jobs Available</p>
-              <a href="#" class="btn btn-warning">Explore Jobs</a>
+              <p class="card-text">
+                <span class="text-body-secondary"
+                  >{{
+                    category.numberOfJobs ? category.numberOfJobs : 0
+                  }}
+                  Posts</span
+                >
+              </p>
+              <!-- <a href="#" class="btn btn-warning">Explore Jobs</a> -->
             </div>
           </div>
         </div>
@@ -127,7 +157,7 @@
       </div>
     </div>
   </div>
-  <div class="card text-center mt-5" style="border: none">
+  <!-- <div class="card text-center mt-5" style="border: none">
     <div class="card-body bg-light" style="border: none">
       <h5>Looking for a job ?</h5>
       <h5>Upload your resume and easly apply to jobs !</h5>
@@ -142,7 +172,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="card mt-2" style="border: none">
     <div class="card-body bg-light">
       <div class="row">
@@ -154,7 +184,7 @@
             color: rgba(128, 128, 128, 0.589);
           "
         >
-          <i class="bi bi-people-fill me-2"></i>Users
+          <i class="bi bi-people-fill me-2"></i>{{ users.users.length }} Users
         </div>
         <div
           class="col-md-6 col-sm-12 text-center"
@@ -164,7 +194,7 @@
             color: rgba(128, 128, 128, 0.589);
           "
         >
-          <i class="bi bi-megaphone me-2"></i>Jobs
+          <i class="bi bi-megaphone me-2"></i>{{ jobsResu.length }} Jobs
         </div>
       </div>
     </div>

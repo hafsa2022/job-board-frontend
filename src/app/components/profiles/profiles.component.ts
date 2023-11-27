@@ -1,40 +1,40 @@
-import { Component } from '@angular/core';
+import { ProfileService } from 'src/app/services/profile.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profiles',
   templateUrl: './profiles.component.html',
   styleUrls: ['./profiles.component.css'],
 })
-export class ProfilesComponent {
-  jobs = [
-    {
-      jobImage: '',
-      jobTitle: 'job1',
-      jobDescription:
-        '   This is a wider card with supporting text below as a naturallead-in to additional content. This content is a little bit longer.',
-    },
-    {
-      jobImage: '',
-      jobTitle: 'job2',
-      jobDescription:
-        '   This is a wider card with supporting text below as a naturallead-in to additional content. This content is a little bit longer.',
-    },
-    {
-      jobImage: '',
-      jobTitle: 'job3',
-      jobDescription:
-        '   This is a wider card with supporting text below as a naturallead-in to additional content. This content is a little bit longer.',
-    },
-    {
-      jobImage: '',
-      jobTitle: 'job4',
-      jobDescription:
-        '   This is a wider card with supporting text below as a naturallead-in to additional content. This content is a little bit longer.',
-    },
-  ];
-  constructor(private router: Router) {}
-  profileView() {
-    this.router.navigateByUrl('profile');
+export class ProfilesComponent implements OnInit {
+  profilesResu!: any;
+  url!: any;
+  constructor(
+    private router: Router,
+    private profileService: ProfileService,
+    private sanitizer: DomSanitizer
+  ) {}
+
+  ngOnInit(): void {
+    this.profileService.getAllProfiles().subscribe((data) => {
+      this.profilesResu = data;
+    });
+  }
+
+  getImageUrl(filename: string): SafeResourceUrl {
+    if (filename === null) {
+      this.url =
+        'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png';
+    } else {
+      this.url = `http://localhost:8000/storage/images/profiles/${filename}`;
+    }
+
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+  }
+
+  selectProfile(profile: any) {
+    this.router.navigate(['profile'], { state: { profile: profile } });
   }
 }

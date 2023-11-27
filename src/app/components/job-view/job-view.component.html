@@ -5,7 +5,7 @@
   </div>
   <div class="card p-5 m-5" style="border: none">
     <div class="card-header" style="background-color: white">
-      <h4 class="fs-title" style="color: black">Title Of Job</h4>
+      <h4 class="fs-title" style="color: black">{{ data.title }}</h4>
     </div>
     <div class="card-body">
       <div class="row">
@@ -14,41 +14,32 @@
             <div class="card-body">
               <div class="row">
                 <span class="col-md-4 col-sm-12" style="color: gray"
-                  ><strong><i class="bi bi-clock me-1"></i>date</strong></span
+                  ><strong
+                    ><i class="bi bi-clock me-1"></i
+                    >{{ data.created_at }}</strong
+                  ></span
                 >
                 <span class="col-md-4 col-sm-12" style="color: gray">
                   <strong>
-                    <i class="bi bi-folder me-1"></i>categoryType</strong
+                    <i class="bi bi-folder me-1"></i>{{ data.category }}</strong
                   ></span
                 >
                 <span class="col-md-4 col-sm-12" style="color: gray">
                   <strong
-                    ><i class="bi bi-geo-alt me-1"></i>categoryType</strong
+                    ><i class="bi bi-geo-alt me-1"></i>{{ data.city }},
+                    {{ data.country }}</strong
                   ></span
                 >
                 <!-- <span class="col-3"> categoryType</span> -->
               </div>
               <h3 class="pt-5 mt-3">Job Details</h3>
               <div class="pt-2">
-                Blanditiis amet sint earum et eaque. Expedita aliquam dolorem ut
-                voluptatem commodi error quos rem. Explicabo consequatur omnis
-                accusantium optio. Omnis eum culpa quam facere eius sint aut.
-                Dolores repellendus qui et. Eaque et atque sed non expedita
-                quia. Similique qui libero illum voluptates nostrum ipsum
-                exercitationem et. Velit voluptate molestiae maxime.
+                {{ data.description }}
               </div>
 
               <h3 class="pt-5 mt-3">Company Description</h3>
               <div class="pt-2">
-                Et nam nihil ut modi vel est pariatur. Et harum nihil occaecati
-                sunt est sit numquam. Nulla non odio debitis et enim. Aut
-                consequatur provident temporibus id inventore adipisci et.
-              </div>
-              <h3 class="pt-5 mt-3">Skills</h3>
-              <div class="pt-2">
-                <button class="btn btn-success me-2" *ngFor="let i of skills">
-                  {{ i.skillName }}
-                </button>
+                {{ data.company.description }}
               </div>
             </div>
           </div>
@@ -59,11 +50,10 @@
               class="card-body"
               style="background-color: rgba(119, 118, 118, 0.171)"
             >
-              <div><strong>START DATE:</strong> 2023-12-05</div>
-              <div><strong>COMPANY:</strong> Volkman LLC</div>
-              <div><strong>SALARY:</strong> $8 - $635</div>
-              <div><strong>JOB TYPE:</strong> Temporary</div>
-              <div><strong>LOCATION:</strong> Saks</div>
+              <div><strong>START DATE:</strong> {{ data.start_date }}</div>
+              <div><strong>COMPANY:</strong> {{ data.company.name }}</div>
+              <div><strong>SALARY:</strong> {{ data.salary }} DH</div>
+              <div><strong>JOB TYPE:</strong> {{ data.type }}</div>
             </div>
           </div>
         </div>
@@ -74,11 +64,20 @@
       style="background-color: white; border: none"
     >
       <button
+        *ngIf="userData.role === 'Job Seeker'"
         class="btn btn-warning btn-style"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal2"
       >
         <strong>Apply Now</strong>
+      </button>
+      <button
+        *ngIf="userData.role === 'Employer'"
+        class="btn btn-warning btn-style"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal3"
+      >
+        <strong>Update</strong>
       </button>
     </div>
   </div>
@@ -99,36 +98,29 @@
             <form [formGroup]="applyDetails" id="msform">
               <fieldset>
                 <h2 class="fs-title">Apply To This Job</h2>
-                <input
-                  type="text"
-                  formControlName="fullName"
-                  [ngClass]="{
-                    'is-invalid': candidate['fullName'].errors
-                  }"
-                  placeholder="FullName"
-                />
-                <div *ngIf="applyDetails.controls['fullName'].errors">
+                <input type="text" formControlName="fullName" name="fullname" />
+                <!-- <div *ngIf="applyDetails.controls['fullName'].errors">
                   <div
                     *ngIf="candidate['fullName'].errors?.['required']"
                     class="alert alert-danger"
                   >
                     This field is required
                   </div>
-                </div>
+                </div> -->
                 <input
                   type="email"
                   formControlName="email"
                   name="email"
                   placeholder="Email"
                 />
-                <div *ngIf="applyDetails.controls['email'].errors">
+                <!-- <div *ngIf="applyDetails.controls['email'].errors">
                   <div
                     *ngIf="candidate['email'].errors?.['required']"
                     class="alert alert-danger"
                   >
                     This field is required
                   </div>
-                </div>
+                </div> -->
                 <input
                   type="text"
                   formControlName="phoneNumber"
@@ -136,12 +128,33 @@
                   placeholder="Phone Number"
                   class="form-control form-control-lg"
                 />
+
+                <select
+                  class="form-select"
+                  id="inputNumberOfExper"
+                  name="numberofexper"
+                  formControlName="numberOfExper"
+                >
+                  <option *ngFor="let s of series" [value]="s">
+                    {{ s }}
+                  </option>
+                </select>
+                <div *ngIf="applyDetails.controls['numberOfExper'].errors">
+                  <div
+                    *ngIf="candidate['numberOfExper'].errors?.['required']"
+                    class="alert alert-danger"
+                  >
+                    This field is required
+                  </div>
+                </div>
                 <input
                   type="file"
                   formControlName="resume"
                   name="resume"
                   placeholder="Add Your Resume"
+                  (change)="uploadFile($event)"
                   class="form-control"
+                  accept=".pdf"
                 />
                 <div *ngIf="applyDetails.controls['resume'].errors">
                   <div
@@ -174,7 +187,7 @@
                   </div>
                 </div> -->
                 <input
-                  (click)="submit()"
+                  (click)="apply()"
                   type="submit"
                   name="submit"
                   class="submit action-button"
@@ -191,6 +204,126 @@
           Save changes
         </button>
       </div> -->
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal3"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel3"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 col-md-offset-3">
+            <form [formGroup]="jobDetails" id="msform">
+              <h2 class="fs-title">Job Details</h2>
+              <div class="input-group mb-3">
+                <select
+                  class="form-select"
+                  id="inputGroupSelect01"
+                  formControlName="jobCategory"
+                >
+                  <option *ngFor="let c of categories" [value]="c.categoryName">
+                    {{ c.categoryName }}
+                  </option>
+                </select>
+              </div>
+              <div *ngIf="jobDetails.controls['jobCategory'].errors">
+                <div
+                  *ngIf="job['jobCategory'].errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  This field is required
+                </div>
+              </div>
+              <input
+                type="text"
+                formControlName="jobTitle"
+                placeholder="Title"
+              />
+              <div *ngIf="jobDetails.controls['jobTitle'].errors">
+                <div
+                  *ngIf="job['jobTitle'].errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  This field is required
+                </div>
+              </div>
+              <textarea
+                rows="5"
+                cols="5"
+                formControlName="jobDescription"
+                placeholder="Job Description"
+              ></textarea>
+
+              <div *ngIf="jobDetails.controls['jobDescription'].errors">
+                <div
+                  *ngIf="job['jobDescription'].errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  This field is required
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <select
+                  class="form-select"
+                  id="inputGroupSelect02"
+                  formControlName="jobType"
+                >
+                  <option *ngFor="let j of jobsList" [value]="j.typeName">
+                    {{ j.typeName }}
+                  </option>
+                </select>
+              </div>
+              <input
+                type="text"
+                formControlName="salary"
+                placeholder="Salary ( DH )"
+              />
+              <input
+                type="date"
+                formControlName="startDate"
+                placeholder="Start Date"
+              />
+              <input type="text" formControlName="city" placeholder="City" />
+              <div *ngIf="jobDetails.controls['city'].errors">
+                <div
+                  *ngIf="job['city'].errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  This field is required
+                </div>
+              </div>
+              <input
+                type="text"
+                formControlName="country"
+                placeholder="Country"
+              />
+              <div *ngIf="jobDetails.controls['country'].errors">
+                <div
+                  *ngIf="job['country'].errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  This field is required
+                </div>
+              </div>
+              <input
+                (click)="updateJob()"
+                type="submit"
+                name="submit"
+                class="submit action-button"
+                value="Update"
+                data-bs-dismiss="modal"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

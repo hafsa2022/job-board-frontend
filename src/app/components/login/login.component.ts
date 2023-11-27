@@ -22,7 +22,7 @@ export class LoginComponent {
     private router: Router,
     private authStatusService: AuthstatusService,
     private userDataService: UserDataService,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) {}
   submitLogin() {
     this.authService.login(this.form).subscribe(
@@ -42,6 +42,10 @@ export class LoginComponent {
     this.userDataService.handel(data.user);
     this.authStatusService.changeStatus(true);
     this.router.navigateByUrl('/');
+    setTimeout(() => {
+      // Refresh the page
+      window.location.reload();
+    }, 1); //
   }
 
   handelError(error: any) {

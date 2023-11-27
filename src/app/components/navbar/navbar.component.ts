@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
     { id: 3, categoryName: 'Delivery Driver' },
     { id: 4, categoryName: 'Data Science' },
     { id: 5, categoryName: 'It & Networking' },
-    { id: 6, categoryName: 'Humain Resource' },
+    { id: 6, categoryName: 'Marketing & Communication' },
   ];
   jobsList = [
     { id: 1, typeName: 'Full-time' },
@@ -40,6 +40,7 @@ export class NavbarComponent implements OnInit {
     { id: 5, typeName: 'Intership' },
     { id: 5, typeName: 'Permanent' },
   ];
+  userData!: any;
   constructor(
     private authStatusService: AuthstatusService,
     private router: Router,
@@ -88,13 +89,16 @@ export class NavbarComponent implements OnInit {
     //   university: ['', Validators.required],
     //   total_marks: ['', Validators.required],
     // });
+    this.userData = this.userDataService.get();
   }
 
   logout(event: MouseEvent) {
     event.preventDefault();
     this.authStatusService.changeStatus(false);
     this.tokenService.remove();
-    this.router.navigateByUrl('/');
+    this.userDataService.remove();
+    this.router.navigateByUrl('login');
+    window.location.reload();
   }
 
   toggleNavbar() {
@@ -201,12 +205,12 @@ export class NavbarComponent implements OnInit {
           formData.append('salary', this.jobDetails.get('salary')?.value);
           formData.append('city', this.jobDetails.get('city')?.value);
           formData.append('country', this.jobDetails.get('country')?.value);
-           formData.append('startDate', this.jobDetails.get('startDate')?.value);
+          formData.append('startDate', this.jobDetails.get('startDate')?.value);
           formData.append('companyId', this.companyData.company.id);
           formData.append('userId', this.userDataService.get().id);
           this.jobService.addJob(formData).subscribe((data) => {
             this.toastr.success('This job was created successfully', '', {
-              timeOut: 2000,
+              timeOut: 3000,
               progressBar: true,
             });
             this.companyInformation.patchValue({
@@ -226,6 +230,7 @@ export class NavbarComponent implements OnInit {
               phoneNumber: '',
               city: '',
             });
+            window.location.reload();
           });
         });
       } else {

@@ -7,21 +7,6 @@
             <form #searchForm="ngForm">
               <div class="row mb-3">
                 <label
-                  for="inputFilter"
-                  class="col-md-8 col-sm-3 col-form-label"
-                  >Filtre</label
-                >
-                <div class="col-md-12 col-sm-6">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="inputFilter"
-                    name="filter"
-                  />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label
                   for="inputCategory"
                   class="col-md-12 col-sm-3 col-form-label"
                   >Category</label
@@ -37,6 +22,7 @@
                     class="form-select"
                     id="inputGroupSelect01"
                     name="category"
+                    [(ngModel)]="searchCategory"
                   >
                     <!-- <option>Humain Resource</option> -->
                     <option
@@ -59,6 +45,7 @@
                     class="form-select"
                     id="inputGroupSelect02"
                     name="jobtype"
+                    [(ngModel)]="searchType"
                   >
                     <option *ngFor="let j of jobsList" [value]="j.typeName">
                       {{ j.typeName }}
@@ -76,11 +63,14 @@
                     class="form-control"
                     id="inputCity"
                     name="city"
+                    [(ngModel)]="searchCity"
                   />
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="inputCountry" class="col-md-12 col-sm-3 col-form-label"
+                <label
+                  for="inputCountry"
+                  class="col-md-12 col-sm-3 col-form-label"
                   >Country</label
                 >
                 <div class="col-md-12 col-sm-6">
@@ -89,6 +79,7 @@
                     class="form-control"
                     id="inputCountry"
                     name="country"
+                    [(ngModel)]="searchCountry"
                   />
                 </div>
               </div>
@@ -111,7 +102,7 @@
                 <button
                   type="submit"
                   class="btn btn-warning mx-auto"
-                  [disabled]="!searchForm.valid"
+                  (click)="search()"
                 >
                   <strong>Search</strong>
                 </button>
@@ -127,27 +118,50 @@
       </div>
       <div class="card-body bg-light">
         <div
+          class="card-text text-gray p-5 text-center"
+          style="max-width: 100%; border-radius: 12px"
+          *ngIf="jobsResu.length === 0"
+        >
+          Nothing Posted Yet!
+        </div>
+        <div
           class="card mb-3"
           style="max-width: 100%; border-radius: 12px"
-          *ngFor="let job of jobs"
+          *ngFor="let job of jobsResu"
         >
           <div class="row g-0">
-            <div class="col-md-4">
-              <img src="..." class="img-fluid rounded-start" alt="..." />
+            <div class="ps-5 py-5 col-md-3 col-sm-12">
+              <img
+                class=""
+                [src]="getImageUrl(job.company.image)"
+                class="rounded-circle"
+                width="150"
+                height="150"
+                alt="..."
+              />
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 ps-3 py-3">
               <div class="card-body">
-                <h5 class="card-title">{{ job.jobTitle }}</h5>
-                <p class="card-text">{{ job.jobDescription }}</p>
-                <button
-                  class="btn btn-outline-warning btn-sm mb-3"
-                  (click)="jobView()"
+                <h5 class="card-title">{{ job.title }}</h5>
+                <span class="text-body-secondary"
+                  >{{ job.city }},{{ job.country }}</span
                 >
-                  <strong>Job View</strong>
+                <p class="text-body-secondary">
+                  {{
+                    job.description.length > 100
+                      ? job.description.slice(0, 100) + "..."
+                      : job.description
+                  }}
+                </p>
+                <button
+                  (click)="selectJob(job)"
+                  class="btn btn-outline-warning btn-sm mb-2"
+                >
+                  <strong>View</strong>
                 </button>
                 <p class="card-text">
                   <small class="text-body-secondary"
-                    >Last updated 3 mins ago</small
+                    >Published: {{ job.created_at }}</small
                   >
                 </p>
               </div>
@@ -155,11 +169,11 @@
           </div>
         </div>
       </div>
-      <div class="card-footer text-center bg-light" style="border: none">
-        <a href="#" style="text-decoration: none" class="view-more"
-          ><span class=""> View All Jobs</span></a
+      <!-- <div class="card-footer text-center bg-light" style="border: none">
+        <a style="text-decoration: none" class="view-more" routerLink="jobs"
+          ><span> View All Jobs</span></a
         >
-      </div>
+      </div> -->
       <!-- <div class="card-footer text-center bg-light" style="border: none">
         <nav aria-label="...">
           <ul class="pagination justify-content-center">

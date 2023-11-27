@@ -98,39 +98,63 @@
         </div>
       </div>
     </div> -->
-    <div class="card col-md-11 col-sm-12 bg-light pt-4 mx-auto" style="border: none">
+    <div class="card bg-light pt-4" style="border: none">
       <div class="card-header bg-light" style="border: none">
         <h3 class="fs-title">All Profiles</h3>
       </div>
       <div class="card-body bg-light">
         <div
-          class="card mb-3"
+          class="card-text text-gray p-5 text-center"
           style="max-width: 100%; border-radius: 12px"
-          *ngFor="let job of jobs"
+          *ngIf="profilesResu.profiles.length === 0"
+        >
+          Nothing Created Yet!
+        </div>
+        <div
+          class="card mb-3"
+          style="max-width: 80%; border-radius: 12px"
+          *ngFor="let profile of profilesResu.profiles"
         >
           <div class="row g-0">
-            <div class="col-md-4">
-              <img src="..." class="img-fluid rounded-start" alt="..." />
+            <div class="ps-4 mt-2 col-md-3 col-sm-12">
+              <img
+                [src]="getImageUrl(profile.image)"
+                class="rounded-circle"
+                alt="..."
+                width="150"
+                height="150"
+              />
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
               <div class="card-body">
-                <h5 class="card-title">{{ job.jobTitle }}</h5>
-                <p class="card-text">{{ job.jobDescription }}</p>
-                <button
-                  class="btn btn-outline-warning btn-sm mb-3"
-                  (click)="profileView()"
-                >
-                  <strong>Profile View</strong>
-                </button>
+                <h5 class="card-title">{{ profile.username }}</h5>
+                <p class="card-text">{{ profile.position }}</p>
                 <p class="card-text">
-                  <small class="text-body-secondary">Created : </small>
+                  {{
+                    profile.skills.length > 30
+                      ? profile.skills.slice(0, 30) + "..."
+                      : profile.skills
+                  }}
+                </p>
+                <p class="card-text">
+                  <small class="text-body-secondary"
+                    >Created: {{ profile.created_at }}
+                  </small>
                 </p>
               </div>
+            </div>
+            <div class="col-md-2" style="align-self: center">
+              <button
+                class="btn btn-outline-warning btn-sm mb-3"
+                (click)="selectProfile(profile)"
+              >
+                <strong>View</strong>
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="card-footer text-center bg-light" style="border: none">
+      <!-- <div class="card-footer text-center bg-light" style="border: none">
         <nav aria-label="...">
           <ul class="pagination justify-content-center">
             <li class="page-item disabled">
@@ -140,7 +164,7 @@
             <li class="page-item"><a class="page-link" href="#">3</a></li>
           </ul>
         </nav>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

@@ -41,17 +41,16 @@ export class SignupComponent {
           fullName: this.res.userData.username,
           email: this.res.userData.email,
         };
-        this.profileService
-          .addProfile(params)
-          .subscribe((res) => console.log(res));
-        this.toastr.success(
-          'You count created succesfully, please go to Log In.',
-          '',
-          {
-            timeOut: 2000,
-            progressBar: true,
-          }
-        );
+        this.profileService.addProfile(params).subscribe((res) => {
+          this.toastr.success(
+            'Your account created succesfully, please go to Log In.',
+            '',
+            {
+              timeOut: 3000,
+              progressBar: true,
+            }
+          );
+        });
       },
       (error) => this.handelError(error)
     );

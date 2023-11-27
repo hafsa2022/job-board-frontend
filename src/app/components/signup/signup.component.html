@@ -3,8 +3,9 @@
   <div class="card pt-5">
     <div class="card-body">
       <form #signupForm="ngForm" (ngSubmit)="submitSignup()">
-        <!-- <div class="alert alert-success" [hidden]="!getResponse">
-        </div> -->
+        <div class="alert alert-success" [hidden]="!getResponse">
+          Your account created succesfully, please go to Log In.
+        </div>
         <fieldset class="row mb-3">
           <legend class="col-form-label col-form-label-lg col-sm-4 pt-0">
             You are

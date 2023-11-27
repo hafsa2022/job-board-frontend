@@ -1,0 +1,22 @@
+a {
+  text-decoration: none;
+  color: #ffc107;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.card,
+.card-body {
+  border: none;
+}
+
+.card-header {
+  background-color: white;
+}

@@ -18,4 +18,8 @@ export class JobService {
   getAllJobs() {
     return this.http.get(this.baseUrl + 'getalljobs');
   }
+
+  searchJobs(data: any) {
+    return this.http.post(this.baseUrl + 'searchjobs', data);
+  }
 }

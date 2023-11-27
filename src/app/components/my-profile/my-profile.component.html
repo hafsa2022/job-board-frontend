@@ -164,10 +164,10 @@
         <div class="row mb-3" *ngIf="userData.role === 'Employer'">
           <label
             for="inputImage"
-            class="col-sm-8 col-form-label col-form-label-lg"
+            class="col-md-2 col-sm-12 col-form-label col-form-label-lg"
             >Image</label
           >
-          <div class="col-sm-12">
+          <div class="col-md-10 col-sm-12">
             <input
               type="file"
               class="form-control form-control-lg"
@@ -213,6 +213,26 @@
               name="country"
               required
             />
+          </div>
+        </div>
+        <div class="row mb-3" *ngIf="userData.role === 'Job Seeker'">
+          <label
+            for="inputNumberOfExper"
+            class="col-md-2 col-sm-12 col-form-label col-form-label-lg"
+            >Number Of Exper</label
+          >
+          <div class="col-md-10 col-sm-12">
+            <select
+              class="form-select"
+              id="inputNumberOfExper"
+              name="numberofexper"
+              [(ngModel)]="profileDetails.numberOfExper"
+            >
+              <!-- <option>Humain Resource</option> -->
+              <option *ngFor="let s of series" [value]="s">
+                {{ s }}
+              </option>
+            </select>
           </div>
         </div>
         <!-- <div class="alert alert-danger" [hidden]="!error.fullname">

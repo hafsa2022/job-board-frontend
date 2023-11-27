@@ -15,5 +15,9 @@ export class CompanyService {
   updateCompany(data: any) {
     return this.http.post(this.baseUrl + 'updatecompany', data);
   }
+
+  getAllComapnies() {
+    return this.http.get(this.baseUrl + 'getallcompanies');
+  }
 }
 

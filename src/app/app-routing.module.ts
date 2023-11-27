@@ -1,3 +1,4 @@
+import { ApplicationDetailsComponent } from './components/application-details/application-details.component';
 import { JobViewComponent } from './components/job-view/job-view.component';
 import { HomeComponent } from './components/home/home.component';
 import { JobsComponent } from './components/jobs/jobs.component';
@@ -32,7 +33,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    // canActivate: [AfterLoginService],
+    canActivate: [AfterLoginService],
   },
   {
     path: 'job-view',
@@ -45,6 +46,12 @@ const routes: Routes = [
   {
     path: 'my-profile',
     component: MyProfileComponent,
+    canActivate: [AfterLoginService],
+  },
+  {
+    path: 'application-details',
+    component: ApplicationDetailsComponent,
+    canActivate: [AfterLoginService],
   },
 ];
 

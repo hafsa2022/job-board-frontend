@@ -28,4 +28,11 @@ export class ProfileService {
       headers: headers,
     });
   }
+
+  getProfile(data: any) {
+    const headers = new HttpHeaders();
+    return this.http.post(this.baseUrl + 'getprofile', data, {
+      headers: headers,
+    });
+  }
 }

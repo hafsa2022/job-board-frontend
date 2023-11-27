@@ -19,6 +19,8 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ApplicationDetailsComponent } from './components/application-details/application-details.component';
+import { DayDifferencePipe } from './day-difference.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ToastrModule } from 'ngx-toastr';
     ProfileViewComponent,
     DashboardComponent,
     MyProfileComponent,
+    ApplicationDetailsComponent,
+    DayDifferencePipe,
   ],
   imports: [
     BrowserModule,
